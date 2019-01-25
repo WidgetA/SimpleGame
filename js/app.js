@@ -1,5 +1,6 @@
 var Enemy = function() {
     // random and genRandom is used to generate different enemy in diffrent speed and position
+    // reference：https://www.imooc.com/article/details/id/21173
     const randomItem = items => items[Math.random() * items.length | 0];
     const genRandom = (min, max) => (Math.random() * (max - min + 1) | 0) + min;
 
