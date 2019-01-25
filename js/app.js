@@ -1,9 +1,5 @@
-// 这是我们的玩家要躲避的敌人 
 var Enemy = function() {
-    // 要应用到每个敌人的实例的变量写在这里 101*171 (0, 74, 101, 70)
-    // 我们已经提供了一个来帮助你实现更多
-
-    // 敌人的图片，用一个我们提供的工具函数来轻松的加载文件
+    // random and genRandom is used to generate different enemy in diffrent speed and position
     const randomItem = items => items[Math.random() * items.length | 0];
     const genRandom = (min, max) => (Math.random() * (max - min + 1) | 0) + min;
 
@@ -13,13 +9,11 @@ var Enemy = function() {
     this.speed = genRandom(30, 300)
 };
 
-// 此为游戏必须的函数，用来更新敌人的位置
-// 参数: dt ，表示时间间隙
 Enemy.prototype.update = function(dt) {
-    // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
-    // 都是以同样的速度运行的
-    
+    // different enemy should have different speed
     this.x = this.speed * dt + this.x
+
+    // this parts is used to judge if bugs meet the player
     let mid_x2 = player.x + 18 + 35
     let mid_x1 = this.x + 50
     let mid_y2 = player.y + 65 + 35
@@ -30,13 +24,10 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// 此为游戏必须的函数，用来在屏幕上画出敌人，
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// 现在实现你自己的玩家类
-// 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数， 101*171 ((18, 65, 67, 71))
 var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 40;
@@ -79,6 +70,7 @@ Player.prototype.handleInput = function (key) {
     }
 }
 
+// selector class to chose a role
 var Selector = function() {
     this.sprite = 'images/Selector.png';
     this.x = 15
@@ -115,9 +107,6 @@ Selector.prototype.handleInput = function (key) {
     }
 }
 
-// 现在实例化你的所有对象
-// 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
-// 把玩家对象放进一个叫 player 的变量里面
 const allEnemies = []
 const e1 = new Enemy;
 const e2 = new Enemy;
@@ -127,6 +116,7 @@ allEnemies.push(e2);
 allEnemies.push(e3);
 
 const player = new Player;
+
 const selector = new Selector;
 var role = null
 
