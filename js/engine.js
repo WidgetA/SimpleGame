@@ -77,6 +77,10 @@ var Engine = (function(global) {
         player.render();
     }
 
+    function reset() {
+        
+    }
+
     function selectPlayer(){
         selector.render()
         var rowImages = [
