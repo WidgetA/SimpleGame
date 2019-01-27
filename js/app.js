@@ -119,7 +119,7 @@ allEnemies.push(e3);
 const player = new Player;
 
 const selector = new Selector;
-var role = null
+var role = null;
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
 // 方法里面。你不需要再更改这段代码了。

@@ -21,7 +21,6 @@ var Engine = (function(global) {
     }
 
     function init() {
-        reset();
         lastTime = Date.now();
         main();
     }
@@ -75,10 +74,6 @@ var Engine = (function(global) {
         });
 
         player.render();
-    }
-
-    function reset() {
-        
     }
 
     function selectPlayer(){
