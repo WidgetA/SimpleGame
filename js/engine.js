@@ -14,7 +14,9 @@ var Engine = (function(global) {
             dt = (now - lastTime) / 1000.0;
         update(dt);
         render();
-
+        if (winner.win) {
+            winner.trans(dt)
+        }
         lastTime = now;
 
         win.requestAnimationFrame(main);
@@ -74,6 +76,15 @@ var Engine = (function(global) {
         });
 
         player.render();
+
+        // The timer keeps the game from starting so fast
+        if (player.y + 65 + 71 < 180) {
+            setTimeout(function(){
+                winner.win = true
+                player.x = 40
+                player.y = 400
+            }, 600)
+        }
     }
 
     function selectPlayer(){
@@ -103,7 +114,8 @@ var Engine = (function(global) {
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
-        'images/Selector.png'
+        'images/Selector.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 

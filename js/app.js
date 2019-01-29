@@ -38,10 +38,6 @@ var Player = function() {
 Player.prototype.update = function (right, up){
         this.x = this.x + right
         this.y = this.y + up
-        if (this.y + 65 + 71 < 180) {
-            this.x = 40
-            this.y = 400
-        }
 };
 
 Player.prototype.render = function() {
@@ -108,6 +104,35 @@ Selector.prototype.handleInput = function (key) {
     }
 }
 
+// a class that generates a victory animation
+var Winner = function() {
+    this.sprite = 'images/Star.png';
+    this.x = 200;
+    this.y = 275;
+    this.time = 4;
+    this.win = false;        
+};
+
+Winner.prototype.trans = function(dt) {
+    if (200 - 50 * (this.time - 1) >= 0 && 275 - 50 * (this.time - 1) >= 50) {
+        this.x = 200 - 50 * (this.time - 1)
+        this.y = 275 - 50 * (this.time - 1)
+        this.time = this.time - dt
+    }
+    else {
+        this.x = 0
+        this.y = 50
+    }
+
+    if (this.time > 0) {
+        ctx.drawImage(Resources.get(this.sprite), 0, 51, 100, 100, this.x, this.y, 100 * this.time, 100 * this.time);
+    }
+    else {
+        this.time = 4
+        this.win = false
+    }
+}
+
 const allEnemies = []
 const e1 = new Enemy;
 const e2 = new Enemy;
@@ -121,6 +146,7 @@ const player = new Player;
 const selector = new Selector;
 var role = null;
 
+const winner = new Winner;
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
 // 方法里面。你不需要再更改这段代码了。
 document.addEventListener('keyup', function(e) {
